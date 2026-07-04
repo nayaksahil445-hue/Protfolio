@@ -173,7 +173,7 @@ export default function ContactSection() {
                     name="user_email"
                     id="user_email"
                     required
-                    placeholder="sahil@example.com"
+                    placeholder="nayaksahil445@gmail.com"
                     className="form-input"
                   />
                 </div>

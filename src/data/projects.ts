@@ -89,6 +89,7 @@ export const projects: Project[] = [
       "Order Management System",
     ],
     githubUrl: "https://github.com/nayaksahil445-hue/nayaksahil445-hue",
+    liveUrl: "https://enterprize-sand.vercel.app/",
     category: "Full Stack",
     gradient: "from-[#10B981] to-[#06B6D4]",
     icon: "🛒",
