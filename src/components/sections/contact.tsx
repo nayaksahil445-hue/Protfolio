@@ -54,12 +54,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-[#050816]">
+    <section id="contact" className="relative py-24 bg-[#050816] overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-[30%] left-[-15%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[10%] right-[-15%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Heading */}
         <div className="text-center mb-16">
           <motion.h2

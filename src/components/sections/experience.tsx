@@ -6,12 +6,12 @@ import GlowCard from "@/components/ui/glow-card";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-24 bg-[#050816]">
+    <section id="experience" className="relative py-24 bg-[#050816] overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-[20%] right-[-10%] w-[350px] h-[350px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[30%] left-[-10%] w-[350px] h-[350px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Heading */}
         <div className="text-center mb-20">
           <motion.h2

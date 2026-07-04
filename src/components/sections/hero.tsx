@@ -40,6 +40,7 @@ export default function HeroSection() {
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden"
+      style={{ overflowX: "hidden" }}
     >
       {/* Aurora Gradient Background */}
       <div className="absolute inset-0 bg-[#050816]" />
@@ -50,7 +51,7 @@ export default function HeroSection() {
       {/* Floating Canvas Particles */}
       <ParticleField />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
         {/* Left Text Content */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Animated Greeting Tag */}
@@ -149,7 +150,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px] flex items-center justify-center"
+            className="relative w-[min(280px,80vw)] h-[min(280px,80vw)] md:w-[350px] md:h-[350px] flex items-center justify-center"
           >
             {/* Holographic Glowing Rotator */}
             <div className="absolute inset-0 rounded-full border border-primary/20 animate-spin-slow pointer-events-none" />
@@ -160,7 +161,7 @@ export default function HeroSection() {
             <div className="absolute inset-4 rounded-full border-2 border-accent/40 shadow-[0_0_30px_rgba(6,182,212,0.4)] pointer-events-none z-10" />
 
             {/* Profile Frame */}
-            <div className="w-[220px] h-[220px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden relative border border-primary/40 bg-card shadow-2xl">
+            <div className="w-[min(220px,65vw)] h-[min(220px,65vw)] md:w-[280px] md:h-[280px] rounded-full overflow-hidden relative border border-primary/40 bg-card shadow-2xl">
               <Image
                 src={siteConfig.profileImage}
                 alt={siteConfig.name}

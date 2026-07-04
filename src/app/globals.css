@@ -24,8 +24,49 @@
   --shadow-accent-glow: 0 0 20px rgba(6, 182, 212, 0.3);
 }
 
+.light-mode-active {
+  --bg-dark: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --border-glow: rgba(99, 102, 241, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(99, 102, 241, 0.1);
+  --gradient-hero: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #0891B2 100%);
+  --shadow-glow: 0 4px 20px rgba(99, 102, 241, 0.08);
+  --shadow-glow-lg: 0 10px 40px rgba(99, 102, 241, 0.12);
+  --shadow-accent-glow: 0 4px 20px rgba(6, 182, 212, 0.08);
+}
+
+/* ===== LIGHT MODE STYLING OVERRIDES ===== */
+.light-mode-active .gradient-bg {
+  background: linear-gradient(-45deg, #F8FAFC, #F1F5F9, #E2E8F0, #F8FAFC);
+}
+
+.light-mode-active .aurora-bg::before,
+.light-mode-active .aurora-bg::after {
+  opacity: 0.06;
+}
+
+.light-mode-active .grid-bg {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.05) 1px, transparent 0);
+}
+
+.light-mode-active .neon-text {
+  text-shadow: 
+    0 0 7px rgba(99, 102, 241, 0.2),
+    0 0 10px rgba(99, 102, 241, 0.15);
+}
+
 /* ===== TAILWIND v4 THEME ===== */
 @theme {
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1536px;
   --color-background: var(--bg-dark);
   --color-foreground: var(--text-primary);
   --color-primary: var(--primary);
@@ -153,7 +194,17 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  overflow-x: hidden;
+  /* Mobile: 64px topbar. Desktop: 70px pill + 16px gap from top */
+  scroll-padding-top: 80px;
+  /* Ensure scrollbar width is accounted for correctly */
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  html {
+    scroll-padding-top: 100px;
+  }
 }
 
 body {
@@ -162,6 +213,15 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
+  /* Prevent any child from creating horizontal scroll */
+  width: 100%;
+  position: relative;
+}
+
+/* ===== OVERFLOW CONTAINMENT SAFEGUARDS ===== */
+img, svg, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
@@ -197,18 +257,18 @@ body {
 }
 
 .glass-card {
-  background: rgba(10, 15, 44, 0.5);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  background: rgba(10, 15, 44, 0.7);
-  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+  border-color: var(--primary);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-glow-lg);
   transform: translateY(-4px);
 }
 

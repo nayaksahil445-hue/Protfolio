@@ -30,12 +30,12 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="relative min-h-screen py-24 bg-[#050816]">
-      {/* Background blobs */}
+    <section id="about" className="relative min-h-screen py-24 bg-[#050816] overflow-hidden">
+      {/* Background blobs — clipped by overflow-hidden on section */}
       <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Heading */}
         <div className="text-center mb-16">
           <motion.h2
