@@ -19,7 +19,7 @@ export const siteConfig = {
     "Data Science Student",
     "Web Application Engineer",
   ],
-  bio: `I'm a passionate Full Stack Developer and Computer Science & Data Science Engineering student with a strong foundation in building modern, scalable web applications and AI-powered systems. With hands-on experience across the entire development stack — from crafting pixel-perfect frontends to designing robust backend architectures — I thrive on turning complex ideas into elegant digital solutions. My journey in tech is driven by curiosity, innovation, and a relentless desire to create impactful products that solve real-world problems.`,
+  bio: `I'm Sahil Nayak — a Full Stack Developer and final-year Engineering student at Bhubaneswar Engineering College (BEC), Odisha, passionate about building scalable web applications and AI-driven solutions. Winner of the BPUT Project Exhibition 2025 for an SDG-focused solution on an OSP platform, and winner of TECHSPIRE 1.0 Hackathon (NIT BBSR) with Team Alpha Coders in the Tourism Tech theme. Certified in AI & ML (CTTC, Govt. of India) and Advanced C (LIT Bhubaneswar). Attended the "AI on Wheels" seminar at the Siemens Centre of Excellence. Tech stack includes Python, Java, C/C++, JavaScript, React, Angular, Node.js, Express, FastAPI, MongoDB, MySQL, TensorFlow, PyTorch, OpenCV, Scikit-learn, AWS, Docker, Kubernetes, Firebase, and Vercel. I love turning ideas into working products — from hackathon prototypes to full-stack apps. Currently open to internships, freelance projects, and collaborations. Let's connect!`,
 };
 
 export const navLinks = [

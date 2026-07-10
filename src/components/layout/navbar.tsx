@@ -113,54 +113,36 @@ export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
           Floating pill, 92 % wide, centred, 70 px tall
       ══════════════════════════════════════════════════════ */}
       <motion.header
-        className="fixed top-4 inset-x-0 z-[50] hidden xl:flex justify-center pointer-events-none"
+        className="fixed top-0 inset-x-0 z-[50] hidden xl:flex justify-center pointer-events-none"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className="pointer-events-auto w-[92%] max-w-[1400px] h-[70px] flex items-center justify-between px-6 rounded-2xl"
+          className="pointer-events-auto w-full max-w-[1400px] h-[70px] flex items-center justify-center px-6"
           style={{
-            background: "rgba(11,16,32,0.82)",
-            border: "1px solid rgba(139,92,246,0.25)",
+            background: "rgba(5,10,25,0.92)",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            boxShadow: "0 4px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(139,92,246,0.08)",
+            boxShadow: "0 4px 32px rgba(0,0,0,0.45)",
           }}
         >
-          {/* Logo */}
-          <a
-            href="#home"
-            className="flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded-xl p-1 group"
-            aria-label="Home"
-          >
-            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#8B5CF6]/40 group-hover:border-[#06B6D4] transition-colors duration-300 flex-shrink-0">
-              <Image src={siteConfig.profileImage} alt={siteConfig.name} fill className="object-cover" sizes="36px" priority />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-bold font-mono text-white text-sm tracking-widest uppercase group-hover:text-[#8B5CF6] transition-colors duration-300">
-                {siteConfig.name}
-              </span>
-              <span className="text-[9px] text-white/40 uppercase tracking-widest font-mono">CS &amp; DS Engineer</span>
-            </div>
-          </a>
-
-          {/* Centred nav links */}
-          <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1">
+          <nav className="flex items-center gap-2.5">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-[11px] font-semibold uppercase tracking-widest font-mono rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] ${
+                  className={`relative px-4 py-2 text-[11px] font-semibold uppercase tracking-widest font-mono rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] ${
                     isActive ? "text-white" : "text-white/45 hover:text-white/80"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="desktopPill"
-                      className="absolute inset-0 rounded-lg -z-10"
+                      className="absolute inset-0 rounded-full -z-10"
                       style={{ background: "rgba(139,92,246,0.22)", border: "1px solid rgba(139,92,246,0.35)" }}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -170,32 +152,6 @@ export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
               );
             })}
           </nav>
-
-          {/* Right controls */}
-          <div className="flex items-center gap-3">
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              className="w-9 h-9 rounded-full border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/50 hover:bg-[#8B5CF6]/10 text-white/50 hover:text-white transition-all duration-200 flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            {/* Hire Me CTA */}
-            <a
-              href="#contact"
-              className="px-5 py-2 rounded-lg text-[11px] font-bold font-mono uppercase tracking-widest text-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-              style={{
-                background: "linear-gradient(135deg, #8B5CF6, #6366F1)",
-                boxShadow: "0 2px 16px rgba(139,92,246,0.4)",
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 24px rgba(139,92,246,0.65)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 16px rgba(139,92,246,0.4)"; }}
-            >
-              Hire Me
-            </a>
-          </div>
         </div>
       </motion.header>
 

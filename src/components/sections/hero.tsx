@@ -85,8 +85,8 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-2xl font-mono text-text-secondary mb-6 h-[40px] flex items-center justify-center lg:justify-start"
           >
-            <span className="mr-2">I am an</span>
-            <TypingAnimation words={siteConfig.roles} />
+            <span className="mr-2">I am a</span>
+            <TypingAnimation words={["Full-Stack Developer."]} />
           </motion.div>
 
           {/* Description */}
