@@ -14,13 +14,7 @@ export default function ParticleField() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    let mouse = { x: 0, y: 0, radius: 100 };
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    };
+    let mouse = { x: -9999, y: -9999, radius: 100 };
 
     class Particle {
       x: number;
@@ -50,7 +44,13 @@ export default function ParticleField() {
         if (this.x < 0 || this.x > canvas!.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas!.height) this.speedY *= -1;
 
-        // Mouse interaction
+        // Clamp boundaries to prevent getting stuck
+        if (this.x < 0) this.x = 0;
+        if (this.x > canvas!.width) this.x = canvas!.width;
+        if (this.y < 0) this.y = 0;
+        if (this.y > canvas!.height) this.y = canvas!.height;
+
+        // Mouse & Touch interaction
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -74,17 +74,69 @@ export default function ParticleField() {
       }
     }
 
-    const initParticles = () => {
-      particles = [];
+    const adjustParticles = () => {
       const density = Math.floor((canvas.width * canvas.height) / 12000);
-      for (let i = 0; i < Math.min(density, 150); i++) {
-        particles.push(new Particle());
+      const targetCount = Math.min(density, 150);
+
+      if (particles.length < targetCount) {
+        const toAdd = targetCount - particles.length;
+        for (let i = 0; i < toAdd; i++) {
+          particles.push(new Particle());
+        }
+      } else if (particles.length > targetCount) {
+        particles.splice(targetCount);
+      }
+    };
+
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      const width = parent ? parent.clientWidth : window.innerWidth;
+      const height = parent ? parent.clientHeight : window.innerHeight;
+
+      const oldWidth = canvas.width;
+      const oldHeight = canvas.height;
+
+      if (oldWidth !== width || oldHeight !== height) {
+        canvas.width = width;
+        canvas.height = height;
+
+        // Clamp existing particles to the new bounds
+        particles.forEach((p) => {
+          if (p.x < 0) p.x = 0;
+          if (p.x > width) p.x = Math.random() * width;
+          if (p.y < 0) p.y = 0;
+          if (p.y > height) p.y = Math.random() * height;
+        });
+
+        adjustParticles();
       }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
     };
 
     const animate = () => {
@@ -99,12 +151,18 @@ export default function ParticleField() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     animate();
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -113,7 +171,7 @@ export default function ParticleField() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: "screen" }}
+      style={{ mixBlendMode: "screen", willChange: "transform" }}
     />
   );
 }

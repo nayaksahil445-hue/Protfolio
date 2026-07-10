@@ -21,10 +21,33 @@ export default function CustomCursor() {
       setHidden(false);
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        cursorX.set(e.touches[0].clientX);
+        cursorY.set(e.touches[0].clientY);
+        setHidden(false);
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        cursorX.set(e.touches[0].clientX);
+        cursorY.set(e.touches[0].clientY);
+        setHidden(false);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      setHidden(true);
+    };
+
     const handleMouseLeave = () => setHidden(true);
     const handleMouseEnter = () => setHidden(false);
 
     window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
@@ -38,6 +61,9 @@ export default function CustomCursor() {
       interactiveElements.forEach((el) => {
         el.addEventListener("mouseenter", handleHoverStart);
         el.addEventListener("mouseleave", handleHoverEnd);
+        el.addEventListener("touchstart", handleHoverStart, { passive: true });
+        el.addEventListener("touchend", handleHoverEnd, { passive: true });
+        el.addEventListener("touchcancel", handleHoverEnd, { passive: true });
       });
     };
 
@@ -49,6 +75,9 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
       observer.disconnect();
@@ -61,12 +90,13 @@ export default function CustomCursor() {
     <>
       {/* Outer Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 height-8 rounded-full border border-primary pointer-events-none z-9999 mix-blend-screen hidden md:block"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-primary pointer-events-none z-9999 mix-blend-screen"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
           translateX: "-50%",
           translateY: "-50%",
+          willChange: "transform",
         }}
         animate={{
           scale: hovered ? 1.8 : 1,
@@ -77,12 +107,13 @@ export default function CustomCursor() {
       />
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-9999 hidden md:block"
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-9999"
         style={{
           x: cursorX,
           y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
+          willChange: "transform",
         }}
         animate={{
           scale: hovered ? 0.5 : 1,
