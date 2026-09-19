@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { 
+  Sun, Moon, Menu, X, Command, Search, Sparkles,
+  Home, User, Code2, Briefcase, GraduationCap, Award, Mail, FileText
+} from "lucide-react";
 import Image from "next/image";
 import { siteConfig, navLinks } from "@/data/site-config";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,12 +13,24 @@ interface NavbarProps {
   onToggleCommandPalette: () => void;
 }
 
+const navIcons: Record<string, React.ElementType> = {
+  "#home": Home,
+  "#about": User,
+  "#skills": Code2,
+  "#projects": Briefcase,
+  "#experience": Sparkles,
+  "#education": GraduationCap,
+  "#certifications": Award,
+  "#resume": FileText,
+  "#contact": Mail,
+};
+
 export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const lastScrollY = useRef(0);
 
   /* ── Theme ──────────────────────────────────────────────── */
   useEffect(() => {
@@ -43,16 +58,16 @@ export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  /* ── Active-section observer ────────────────────────────── */
+  /* ── Active-section observer & Scroll Detection ────────────── */
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.substring(1));
 
     const onScroll = () => {
+      setScrolled(window.scrollY > 20);
       if (window.scrollY < 80) { setActiveSection("home"); return; }
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
         setActiveSection("contact"); return;
       }
-      lastScrollY.current = window.scrollY;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -91,138 +106,206 @@ export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-  /* ── Hamburger variants ─────────────────────────────────── */
-  const line1 = { closed: { rotate: 0, y: 0 }, opened: { rotate: 45, y: 7 } };
-  const line2 = { closed: { opacity: 1 }, opened: { opacity: 0 } };
-  const line3 = { closed: { rotate: 0, y: 0 }, opened: { rotate: -45, y: -7 } };
-
-  /* ── Sidebar stagger children ───────────────────────────── */
+  /* ── Sidebar stagger variants ───────────────────────────── */
   const sidebarContainer = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.055, delayChildren: 0.12 } },
+    show: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
   };
   const sidebarItem = {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 260, damping: 22 } },
+    hidden: { opacity: 0, x: -16 },
+    show: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 280, damping: 24 } },
   };
 
   return (
     <>
       {/* ══════════════════════════════════════════════════════
-          DESKTOP NAVBAR  ≥ 1200 px
-          Floating pill, 92 % wide, centred, 70 px tall
+          DESKTOP FLOATING NAVBAR ≥ 1024 px
+          Sleek floating glass capsule
       ══════════════════════════════════════════════════════ */}
       <motion.header
-        className="fixed top-0 inset-x-0 z-[50] hidden xl:flex justify-center pointer-events-none"
-        initial={{ opacity: 0, y: -20 }}
+        className="fixed top-4 inset-x-0 z-[50] hidden lg:flex justify-center pointer-events-none px-6"
+        initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className="pointer-events-auto w-full max-w-[1400px] h-[70px] flex items-center justify-center px-6"
-          style={{
-            background: "rgba(5,10,25,0.92)",
-            borderBottom: "1px solid rgba(255,255,255,0.08)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            boxShadow: "0 4px 32px rgba(0,0,0,0.45)",
-          }}
+          className={`pointer-events-auto w-full max-w-[1280px] h-[64px] flex items-center justify-between px-5 rounded-full transition-all duration-300 ${
+            scrolled
+              ? "bg-[#0A0E1A]/90 border border-[#2A3348] shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_20px_rgba(67,97,238,0.2)] backdrop-blur-2xl"
+              : "bg-[#0A0E1A]/70 border border-[#2A3348]/60 shadow-lg backdrop-blur-xl"
+          }`}
         >
-          <nav className="flex items-center gap-2.5">
+          {/* Brand Logo & Avatar */}
+          <a
+            href="#home"
+            className="flex items-center gap-3 group focus:outline-none flex-shrink-0"
+            aria-label="Home"
+          >
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-[#4361EE]/50 group-hover:border-[#00E676] transition-colors duration-300 flex-shrink-0">
+              <Image src={siteConfig.profileImage} alt={siteConfig.name} fill className="object-cover" sizes="36px" priority />
+              {/* Online indicator dot */}
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#00E676] ring-2 ring-[#0A0E1A]" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold font-mono text-[#F1F1F1] text-xs tracking-wider uppercase group-hover:text-[#00E676] transition-colors duration-200">
+                {siteConfig.name}
+              </span>
+              <span className="text-[9px] font-mono text-[#00E676] flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse" />
+                Available for work
+              </span>
+            </div>
+          </a>
+
+          {/* Navigation Links */}
+          <nav className="flex items-center gap-1 px-2 py-1.5 rounded-full bg-[#131A2B]/60 border border-[#2A3348]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
+              const Icon = navIcons[link.href] || Home;
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-[11px] font-semibold uppercase tracking-widest font-mono rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] ${
-                    isActive ? "text-white" : "text-white/45 hover:text-white/80"
+                  className={`relative flex items-center gap-1.5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider font-mono rounded-full transition-colors duration-200 focus:outline-none ${
+                    isActive ? "text-[#F1F1F1]" : "text-[#A0A0A0] hover:text-[#F1F1F1]"
                   }`}
                 >
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[#00E676]" : "text-[#A0A0A0]"}`} />
+                  <span>{link.label}</span>
                   {isActive && (
                     <motion.span
                       layoutId="desktopPill"
                       className="absolute inset-0 rounded-full -z-10"
-                      style={{ background: "rgba(139,92,246,0.22)", border: "1px solid rgba(139,92,246,0.35)" }}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      style={{
+                        background: "linear-gradient(135deg, rgba(67,97,238,0.35) 0%, rgba(0,230,118,0.2) 100%)",
+                        border: "1px solid #4361EE",
+                        boxShadow: "0 0 15px rgba(67,97,238,0.3)",
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 28 }}
                     />
                   )}
-                  {link.label}
                 </a>
               );
             })}
           </nav>
+
+          {/* Right Action Controls: Quick Command & Theme & Hire Button */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Command Palette Trigger */}
+            <button
+              onClick={onToggleCommandPalette}
+              className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#131A2B] border border-[#2A3348] text-[#A0A0A0] hover:text-[#F1F1F1] hover:border-[#4361EE] transition-all duration-200 text-[11px] font-mono"
+              title="Search & Commands (Ctrl+K)"
+            >
+              <Search className="w-3.5 h-3.5 text-[#4361EE]" />
+              <span>Search</span>
+              <kbd className="px-1.5 py-0.5 rounded text-[9px] bg-[#2A3348] text-[#F1F1F1] font-mono">⌘K</kbd>
+            </button>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-full border border-[#2A3348] hover:border-[#4361EE] bg-[#131A2B] text-[#A0A0A0] hover:text-[#F1F1F1] transition-all duration-200 flex items-center justify-center focus:outline-none"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              title={darkMode ? "Light mode" : "Dark mode"}
+            >
+              {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
+            </button>
+
+            {/* Hire Me CTA Button */}
+            <a
+              href="#contact"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-[#F1F1F1] bg-[#4361EE] hover:bg-[#3651D4] shadow-[0_0_20px_rgba(67,97,238,0.4)] hover:shadow-[0_0_28px_rgba(67,97,238,0.6)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#00E676]" />
+              <span>Hire Me</span>
+            </a>
+          </div>
         </div>
       </motion.header>
 
       {/* ══════════════════════════════════════════════════════
-          MOBILE + TABLET TOPBAR  < 1200 px
-          Minimal strip: Logo · Theme · Hamburger
+          MOBILE + TABLET TOPBAR < 1024 px
+          Clean, modern glass top header
       ══════════════════════════════════════════════════════ */}
       <motion.header
-        className="fixed top-0 inset-x-0 z-[50] xl:hidden flex items-center"
+        className="fixed top-0 inset-x-0 z-[50] lg:hidden flex items-center"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          height: "64px",
-          background: "rgba(11,16,32,0.88)",
-          borderBottom: "1px solid rgba(139,92,246,0.18)",
-          backdropFilter: "blur(18px)",
-          WebkitBackdropFilter: "blur(18px)",
+          height: "60px",
+          background: "rgba(10,14,26,0.9)",
+          borderBottom: "1px solid #2A3348",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
         }}
       >
         <div className="w-full max-w-7xl mx-auto px-4 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo & Avatar */}
           <a
             href="#home"
             className="flex items-center gap-2.5 group focus:outline-none flex-shrink-0"
             aria-label="Home"
           >
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-[#8B5CF6]/40 flex-shrink-0">
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-[#4361EE] flex-shrink-0">
               <Image src={siteConfig.profileImage} alt={siteConfig.name} fill className="object-cover" sizes="32px" priority />
             </div>
-            <span className="font-bold font-mono text-white text-sm tracking-wider uppercase group-hover:text-[#8B5CF6] transition-colors duration-200">
-              {siteConfig.name}
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold font-mono text-[#F1F1F1] text-xs tracking-wider uppercase">
+                {siteConfig.name}
+              </span>
+              <span className="text-[8px] font-mono text-[#00E676] flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-[#00E676] animate-pulse" />
+                Online
+              </span>
+            </div>
           </a>
 
-          {/* Right side icons */}
+          {/* Right Action Controls */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Theme toggle */}
+            {/* Command Search */}
             <button
-              onClick={toggleTheme}
-              className="w-11 h-11 rounded-full border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/45 text-white/50 hover:text-white transition-all duration-200 flex items-center justify-center focus:outline-none"
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              onClick={onToggleCommandPalette}
+              className="w-9 h-9 rounded-full border border-[#2A3348] bg-[#131A2B] text-[#A0A0A0] hover:text-[#F1F1F1] flex items-center justify-center focus:outline-none"
+              aria-label="Search"
+              title="Search commands"
             >
-              {darkMode ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
+              <Search className="w-4 h-4 text-[#4361EE]" />
             </button>
 
-            {/* Hamburger */}
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-full border border-[#2A3348] bg-[#131A2B] text-[#A0A0A0] hover:text-[#F1F1F1] flex items-center justify-center focus:outline-none"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
+            </button>
+
+            {/* Hamburger Button */}
             <button
               onClick={() => setMenuOpen(true)}
-              className="w-11 h-11 rounded-full border border-[#8B5CF6]/25 bg-[#8B5CF6]/10 text-white flex flex-col items-center justify-center gap-[5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] transition-all duration-200 hover:border-[#8B5CF6]/50"
+              className="w-9 h-9 rounded-full border border-[#4361EE]/40 bg-[#4361EE]/20 text-[#F1F1F1] flex items-center justify-center focus:outline-none hover:bg-[#4361EE]/30 transition-all duration-200"
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
-              <span className="w-4.5 h-[2px] bg-white block rounded-full" />
-              <span className="w-4.5 h-[2px] bg-white block rounded-full" />
-              <span className="w-4.5 h-[2px] bg-white block rounded-full" />
+              <Menu className="w-4.5 h-4.5 text-[#F1F1F1]" />
             </button>
           </div>
         </div>
       </motion.header>
 
       {/* ══════════════════════════════════════════════════════
-          LEFT-SIDE DRAWER  (mobile + tablet)
+          SLIDE-OUT NAVIGATION DRAWER (Mobile + Tablet)
       ══════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {menuOpen && (
-          <div className="fixed inset-0 z-[60] xl:hidden" role="dialog" aria-modal="true" aria-label="Navigation menu">
+          <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Navigation menu">
             {/* Backdrop */}
             <motion.div
               className="absolute inset-0"
-              style={{ background: "rgba(5,8,22,0.72)", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+              style={{ background: "rgba(10,14,26,0.85)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -235,126 +318,162 @@ export default function Navbar({ onToggleCommandPalette }: NavbarProps) {
               ref={menuRef}
               className="absolute left-0 top-0 bottom-0 flex flex-col"
               style={{
-                width: "min(340px, 85vw)",
-                background: "rgba(11,16,32,0.97)",
-                border: "1px solid rgba(139,92,246,0.22)",
-                borderLeft: "none",
-                borderRadius: "0 20px 20px 0",
-                boxShadow: "4px 0 40px rgba(0,0,0,0.55), inset -1px 0 0 rgba(139,92,246,0.08)",
-                backdropFilter: "blur(24px)",
-                WebkitBackdropFilter: "blur(24px)",
+                width: "min(340px, 86vw)",
+                background: "#131A2B",
+                borderRight: "1px solid #2A3348",
+                borderRadius: "0 24px 24px 0",
+                boxShadow: "10px 0 50px rgba(0,0,0,0.8)",
+                backdropFilter: "blur(28px)",
+                WebkitBackdropFilter: "blur(28px)",
               }}
               drag="x"
               dragConstraints={{ left: -400, right: 0 }}
-              dragElastic={{ left: 0.25, right: 0.02 }}
+              dragElastic={{ left: 0.2, right: 0.02 }}
               onDragEnd={(_, info) => { if (info.offset.x < -60 || info.velocity.x < -400) closeMenu(); }}
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 34 }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
             >
-              {/* ── Header row: label + action icons + close ── */}
-              <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-[#8B5CF6]/10">
-                <span className="text-[10px] font-bold font-mono tracking-[0.18em] uppercase text-white/30">
-                  Navigation
-                </span>
-
-                <div className="flex items-center gap-2">
-                  {/* Theme toggle inside sidebar */}
-                  <button
-                    onClick={toggleTheme}
-                    className="w-9 h-9 rounded-full border border-[#8B5CF6]/20 text-white/40 hover:text-white hover:border-[#8B5CF6]/45 transition-all duration-200 flex items-center justify-center focus:outline-none"
-                    aria-label={darkMode ? "Light mode" : "Dark mode"}
-                  >
-                    {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                  </button>
-
-                  {/* Close button */}
-                  <button
-                    onClick={closeMenu}
-                    className="w-9 h-9 rounded-full border border-[#8B5CF6]/20 text-white/40 hover:text-white hover:border-[#8B5CF6]/45 transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-                    aria-label="Close menu"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-[#2A3348]">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#4361EE]">
+                    <Image src={siteConfig.profileImage} alt={siteConfig.name} fill className="object-cover" sizes="36px" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-mono text-xs font-bold text-[#F1F1F1] tracking-wider uppercase">
+                      {siteConfig.name}
+                    </span>
+                    <span className="text-[9px] font-mono text-[#00E676]">Full Stack Developer</span>
+                  </div>
                 </div>
+
+                <button
+                  onClick={closeMenu}
+                  className="w-9 h-9 rounded-full border border-[#2A3348] hover:border-[#4361EE] text-[#A0A0A0] hover:text-[#F1F1F1] flex items-center justify-center transition-all duration-200"
+                  aria-label="Close menu"
+                >
+                  <X className="w-4 h-4" />
+                </button>
               </div>
 
-              {/* ── Nav links ── */}
+              {/* Navigation Links */}
               <motion.nav
-                className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-1"
+                className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1.5"
                 variants={sidebarContainer}
                 initial="hidden"
                 animate="show"
               >
                 {navLinks.map((link) => {
                   const isActive = activeSection === link.href.substring(1);
+                  const Icon = navIcons[link.href] || Home;
                   return (
                     <motion.a
                       key={link.href}
                       href={link.href}
                       variants={sidebarItem}
                       onClick={closeMenu}
-                      className={`flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-[13px] font-bold font-mono uppercase tracking-widest transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] border-l-2 ${
+                      className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-[12px] font-bold font-mono uppercase tracking-wider transition-all duration-200 ${
                         isActive
-                          ? "text-white border-[#8B5CF6] bg-[#8B5CF6]/10"
-                          : "text-white/40 border-transparent hover:text-white/75 hover:bg-white/4"
+                          ? "text-[#F1F1F1] bg-[#4361EE]/20 border-l-4 border-[#00E676] shadow-[0_0_15px_rgba(67,97,238,0.3)]"
+                          : "text-[#A0A0A0] border-l-4 border-transparent hover:text-[#F1F1F1] hover:bg-[#2A3348]/40"
                       }`}
-                      style={isActive ? { borderLeft: "2px solid #8B5CF6" } : {}}
                     >
-                      {link.label}
+                      <Icon className={`w-4 h-4 ${isActive ? "text-[#00E676]" : "text-[#A0A0A0]"}`} />
+                      <span>{link.label}</span>
                     </motion.a>
                   );
                 })}
               </motion.nav>
 
-              {/* ── Footer / CTA ── */}
+              {/* Drawer Footer CTA */}
               <div
-                className="px-5 py-5 border-t flex flex-col gap-3"
-                style={{ borderColor: "rgba(139,92,246,0.1)", paddingBottom: "calc(1.25rem + env(safe-area-inset-bottom))" }}
+                className="px-5 py-5 border-t border-[#2A3348] flex flex-col gap-3"
+                style={{ paddingBottom: "calc(1.25rem + env(safe-area-inset-bottom))" }}
               >
                 <div className="grid grid-cols-2 gap-2.5">
-                  {/* Hire Me */}
                   <a
                     href="#contact"
                     onClick={closeMenu}
-                    className="flex items-center justify-center py-3 rounded-xl text-[11px] font-bold font-mono uppercase tracking-widest text-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] min-h-[44px]"
-                    style={{
-                      background: "rgba(139,92,246,0.12)",
-                      border: "1px solid rgba(139,92,246,0.28)",
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.22)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.12)"; }}
+                    className="flex items-center justify-center py-2.5 rounded-xl text-[11px] font-bold font-mono uppercase tracking-wider text-[#F1F1F1] bg-[#4361EE]/20 border border-[#4361EE] hover:bg-[#4361EE]/35 transition-all min-h-[44px]"
                   >
                     Hire Me
                   </a>
-
-                  {/* Resume */}
                   <a
                     href={siteConfig.resumePath}
                     download="Sahil_Nayak_Resume.pdf"
                     onClick={closeMenu}
-                    className="flex items-center justify-center py-3 rounded-xl text-[11px] font-bold font-mono uppercase tracking-widest text-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] min-h-[44px]"
-                    style={{
-                      background: "linear-gradient(135deg, #8B5CF6, #6366F1)",
-                      boxShadow: "0 2px 14px rgba(139,92,246,0.35)",
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(139,92,246,0.6)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 14px rgba(139,92,246,0.35)"; }}
+                    className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[11px] font-bold font-mono uppercase tracking-wider text-[#F1F1F1] bg-[#4361EE] shadow-lg shadow-[#4361EE]/30 min-h-[44px]"
                   >
+                    <FileText className="w-3.5 h-3.5 text-[#00E676]" />
                     Resume
                   </a>
                 </div>
 
                 <div className="flex flex-col items-center gap-0.5 mt-1">
-                  <span className="text-[10px] text-white/25 font-mono">{siteConfig.location}</span>
-                  <span className="text-[9px] text-white/15 font-mono">Pull to Close →</span>
+                  <span className="text-[10px] text-[#A0A0A0] font-mono">{siteConfig.location}</span>
                 </div>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {/* ══════════════════════════════════════════════════════
+          DYNAMIC MOBILE FLOATING BOTTOM DOCK < 1024 px
+          Ultra-clean glass pill bar for thumb interaction
+      ══════════════════════════════════════════════════════ */}
+      <div className="fixed bottom-4 inset-x-0 z-[40] lg:hidden flex justify-center px-4 pointer-events-none">
+        <motion.div 
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-auto flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#0A0E1A]/90 border border-[#2A3348] shadow-[0_12px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(67,97,238,0.2)] backdrop-blur-2xl"
+        >
+          {[
+            { href: "#home", label: "Home", icon: Home },
+            { href: "#about", label: "About", icon: User },
+            { href: "#projects", label: "Projects", icon: Briefcase },
+            { href: "#contact", label: "Contact", icon: Mail },
+          ].map((item) => {
+            const isActive = activeSection === item.href.substring(1);
+            const Icon = item.icon;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`relative flex flex-col items-center justify-center w-11 h-11 rounded-full transition-all duration-200 ${
+                  isActive ? "text-[#F1F1F1] bg-[#4361EE]/30 shadow-[0_0_12px_rgba(67,97,238,0.5)]" : "text-[#A0A0A0] hover:text-[#F1F1F1]"
+                }`}
+                title={item.label}
+              >
+                <Icon className={`w-5 h-5 ${isActive ? "text-[#00E676]" : ""}`} />
+                <span className="sr-only">{item.label}</span>
+                {isActive && (
+                  <motion.span
+                    layoutId="mobileBottomPill"
+                    className="absolute inset-0 rounded-full border border-[#4361EE] -z-10"
+                    transition={{ type: "spring", stiffness: 420, damping: 28 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+          
+          <div className="w-[1px] h-6 bg-[#2A3348] mx-1" />
+
+          {/* Menu Drawer Toggle Button */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="flex items-center justify-center w-11 h-11 rounded-full bg-[#4361EE]/20 border border-[#4361EE]/50 text-[#F1F1F1] hover:bg-[#4361EE]/40 transition-all duration-200"
+            aria-label="More navigation links"
+            title="All Sections Menu"
+          >
+            <Menu className="w-5 h-5 text-[#F1F1F1]" />
+          </button>
+        </motion.div>
+      </div>
     </>
   );
 }

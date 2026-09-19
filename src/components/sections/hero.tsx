@@ -43,9 +43,9 @@ export default function HeroSection() {
       style={{ overflowX: "hidden" }}
     >
       {/* Aurora Gradient Background */}
-      <div className="absolute inset-0 bg-[#050816]" />
-      <div className="absolute inset-0 bg-radial-[circle_at_30%_30%] from-[#6366f1]/15 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-[circle_at_75%_75%] from-[#06b6d4]/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[#0A0E1A]" />
+      <div className="absolute inset-0 bg-radial-[circle_at_30%_30%] from-[#4361EE]/15 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-radial-[circle_at_75%_75%] from-[#00E676]/10 via-transparent to-transparent pointer-events-none" />
       <div className="absolute inset-0 grid-bg opacity-30" />
 
       {/* Floating Canvas Particles */}

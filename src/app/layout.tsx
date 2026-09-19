@@ -91,7 +91,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-[#050816] text-white min-h-screen flex flex-col`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-[#0A0E1A] text-white min-h-screen flex flex-col`}
       >
         {children}
       </body>

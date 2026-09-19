@@ -30,7 +30,7 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {!complete && (
         <motion.div
-          className="fixed inset-0 bg-[#050816] z-[99999] flex flex-col items-center justify-center p-6"
+          className="fixed inset-0 bg-[#0A0E1A] z-[99999] flex flex-col items-center justify-center p-6"
           exit={{
             y: "-100%",
             opacity: 0,
@@ -38,7 +38,7 @@ export default function LoadingScreen() {
           }}
         >
           {/* Animated Background Gradients */}
-          <div className="absolute inset-0 bg-radial-[circle_at_center] from-[#6366f1]/10 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-radial-[circle_at_center] from-[#4361EE]/10 via-transparent to-transparent pointer-events-none" />
 
           {/* Sahil Nayak Monogram */}
           <motion.div
@@ -60,7 +60,7 @@ export default function LoadingScreen() {
                     cx="48"
                     cy="48"
                     r="45"
-                    className="stroke-[#0A0F2C] fill-none"
+                    className="stroke-[#131A2B] fill-none"
                     strokeWidth="2"
                   />
                   <circle

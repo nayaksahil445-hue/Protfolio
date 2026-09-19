@@ -15,7 +15,7 @@ export default function ProjectsSection() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="relative py-24 bg-[#050816] overflow-hidden">
+    <section id="projects" className="relative py-24 bg-[#0A0E1A] overflow-hidden">
       {/* Background radial effects */}
       <div className="absolute top-[40%] left-[-10%] w-[450px] h-[450px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[450px] h-[450px] bg-accent/5 rounded-full blur-[140px] pointer-events-none" />

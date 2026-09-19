@@ -14,13 +14,13 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#050816] pt-16 pb-8 overflow-hidden">
+    <footer className="relative bg-[#0A0E1A] pt-16 pb-8 overflow-hidden">
       {/* SVG Wave Divider at the top of the footer */}
       <div className="absolute top-0 left-0 w-full overflow-hidden line-height-0 transform rotate-180">
         <svg
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative block w-full h-[40px] fill-[#0A0F2C]"
+          className="relative block w-full h-[40px] fill-[#131A2B]"
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3v80H0V56.44c58.2-11.58,115.86-14.85,173.2,0C232.22,69.57,277.67,64.55,321.39,56.44Z"
@@ -31,10 +31,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center gap-8 pt-8">
         {/* Monogram logo */}
         <a href="#home" className="flex flex-col items-center group">
-          <div className="w-12 h-12 rounded-full border border-primary/20 bg-card/85 flex items-center justify-center font-mono font-bold text-white text-lg group-hover:border-accent transition-colors shadow-lg">
+          <div className="w-12 h-12 rounded-full border border-[#2A3348] bg-[#131A2B] flex items-center justify-center font-mono font-bold text-[#F1F1F1] text-lg group-hover:border-[#00E676] transition-colors shadow-lg">
             SN
           </div>
-          <span className="text-xs uppercase tracking-widest text-text-secondary mt-2.5 font-mono font-bold">
+          <span className="text-xs uppercase tracking-widest text-[#A0A0A0] mt-2.5 font-mono font-bold">
             Sahil Nayak
           </span>
         </a>
@@ -47,7 +47,7 @@ export default function Footer() {
               href={soc.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-card border border-primary/10 hover:border-accent/30 text-text-secondary hover:text-white transition-all shadow-md"
+              className="p-2.5 rounded-xl bg-[#131A2B] border border-[#2A3348] hover:border-[#4361EE] text-[#A0A0A0] hover:text-[#F1F1F1] transition-all shadow-md"
               title={soc.label}
             >
               {soc.icon}
@@ -56,11 +56,11 @@ export default function Footer() {
         </div>
 
         {/* Info Grid */}
-        <div className="w-full border-t border-primary/10 mt-4 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm text-text-muted font-mono">
+        <div className="w-full border-t border-[#2A3348] mt-4 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm text-[#A0A0A0] font-mono">
           <span>&copy; {currentYear} Sahil Nayak. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-[#00E676]" />
               Live Clock: Bhubaneswar, India
             </span>
           </div>

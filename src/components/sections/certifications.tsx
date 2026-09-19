@@ -34,7 +34,7 @@ export default function CertificationsSection() {
   ];
 
   return (
-    <section id="certifications" className="relative py-24 bg-[#050816] overflow-hidden">
+    <section id="certifications" className="relative py-24 bg-[#0A0E1A] overflow-hidden">
       <div className="absolute bottom-[20%] right-[-10%] w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">

@@ -54,7 +54,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-[#050816] overflow-hidden">
+    <section id="contact" className="relative py-24 bg-[#0A0E1A] overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
@@ -240,13 +240,14 @@ export default function ContactSection() {
         {/* Embedded Map Grid */}
         <div className="mt-16 rounded-2xl overflow-hidden border border-primary/10 shadow-2xl relative h-[300px]">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119743.68292837335!2d85.73354366633633!3d20.301905333553255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1m3!1d119743.68!2d85.8078512!3d20.3019053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119743.68292837335!2d85.73354366633633!3d20.301905333553255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909d2d5170aa5%3A0xfc580e2b68b33fa8!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1709000000000!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) grayscale(10%)" }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            title="Location Map"
           />
         </div>
       </div>

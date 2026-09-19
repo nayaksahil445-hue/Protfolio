@@ -6,7 +6,7 @@ import GlowCard from "@/components/ui/glow-card";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-24 bg-[#050816] overflow-hidden">
+    <section id="experience" className="relative py-24 bg-[#0A0E1A] overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-[20%] right-[-10%] w-[350px] h-[350px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[30%] left-[-10%] w-[350px] h-[350px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
