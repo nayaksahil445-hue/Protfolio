@@ -356,7 +356,14 @@ export default function ResumeSection() {
                   <h2 className="text-2xl font-bold font-mono text-[#F1F1F1]">SAHIL NAYAK</h2>
                   <p className="text-sm text-[#00E676] font-mono">Full Stack Developer</p>
                   <p className="text-xs text-[#A0A0A0] font-mono mt-1">
-                    Bhubaneswar, Odisha | +91 7894838425 | nayaksahil445@gmail.com | linkedin.com/in/sahil-nayak-dev | github.com/nayaksahil445-hue
+                    Bhubaneswar, Odisha | +91 7894838425 | nayaksahil445@gmail.com |{" "}
+                    <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#4361EE] hover:underline font-bold">
+                      LinkedIn Profile
+                    </a>{" "}
+                    |{" "}
+                    <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-[#4361EE] hover:underline font-bold">
+                      GitHub Profile
+                    </a>
                   </p>
                 </div>
 
@@ -421,11 +428,17 @@ export default function ResumeSection() {
                   </h3>
                   <div className="space-y-3 text-[#A0A0A0]">
                     <div>
-                      <div className="flex justify-between font-bold text-[#F1F1F1]">
+                      <div className="flex justify-between font-bold text-[#F1F1F1] flex-wrap gap-2">
                         <span>Odisha Service Point (OSP) - Web-Based Startup Platform</span>
-                        <a href="https://osp24.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[#00E676] underline">
-                          Live Demo: osp24.vercel.app
-                        </a>
+                        <div className="flex items-center gap-2">
+                          <a href="https://osp24.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[#00E676] hover:underline font-mono">
+                            [Live Demo]
+                          </a>
+                          <span>|</span>
+                          <a href="https://vercel.com/nayaksahil445-hues-projects/osp24" target="_blank" rel="noopener noreferrer" className="text-[#4361EE] hover:underline font-mono">
+                            [Vercel Project]
+                          </a>
+                        </div>
                       </div>
                       <p className="text-[11px] text-[#4361EE] font-mono">Tech Stack: HTML, CSS, JavaScript, MySQL</p>
                       <ul className="list-disc pl-4 space-y-0.5 mt-1">
@@ -437,11 +450,17 @@ export default function ResumeSection() {
                     </div>
 
                     <div>
-                      <div className="flex justify-between font-bold text-[#F1F1F1]">
+                      <div className="flex justify-between font-bold text-[#F1F1F1] flex-wrap gap-2">
                         <span>Smart Attendance System Using Face Recognition</span>
-                        <a href="https://face-recognisation-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[#00E676] underline">
-                          Live Demo: face-recognisation-two.vercel.app
-                        </a>
+                        <div className="flex items-center gap-2">
+                          <a href="https://face-recognisation-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[#00E676] hover:underline font-mono">
+                            [Live Demo]
+                          </a>
+                          <span>|</span>
+                          <a href="https://vercel.com/nayaksahil445-hues-projects/face-recognisation" target="_blank" rel="noopener noreferrer" className="text-[#4361EE] hover:underline font-mono">
+                            [Vercel Project]
+                          </a>
+                        </div>
                       </div>
                       <p className="text-[11px] text-[#4361EE] font-mono">Tech Stack: Python, OpenCV, Face Recognition, SQLite/MySQL</p>
                       <ul className="list-disc pl-4 space-y-0.5 mt-1">
