@@ -10,6 +10,7 @@ import ProjectsSection from "@/components/sections/projects";
 import ExperienceSection from "@/components/sections/experience";
 import EducationSection from "@/components/sections/education";
 import CertificationsSection from "@/components/sections/certifications";
+import ResumeSection from "@/components/sections/resume";
 import ContactSection from "@/components/sections/contact";
 import CustomCursor from "@/components/ui/custom-cursor";
 import ScrollProgressBar from "@/components/ui/scroll-progress";
@@ -49,6 +50,7 @@ export default function Home() {
         <ExperienceSection />
         <EducationSection />
         <CertificationsSection />
+        <ResumeSection />
         <ContactSection />
       </main>
 
