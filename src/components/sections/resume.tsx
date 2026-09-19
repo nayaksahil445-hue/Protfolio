@@ -258,35 +258,39 @@ export default function ResumeSection() {
                   Featured Live Projects
                 </h3>
                 <div className="flex flex-col gap-2.5 text-xs font-mono">
-                  <a
-                    href="https://osp24.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-[#0A0E1A]/80 border border-[#2A3348] hover:border-[#4361EE] rounded-xl flex items-center justify-between group transition-all"
-                  >
+                  <div className="p-3 bg-[#0A0E1A]/80 border border-[#2A3348] hover:border-[#4361EE] rounded-xl flex items-center justify-between group transition-all">
                     <div>
                       <span className="font-bold text-[#F1F1F1] group-hover:text-[#00E676] transition-colors block">
                         Odisha Service Point (OSP)
                       </span>
                       <span className="text-[10px] text-[#A0A0A0]">HTML, CSS, JS, MySQL · 1st Place BPUT 2025</span>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-[#4361EE] group-hover:translate-x-0.5 transition-transform" />
-                  </a>
+                    <div className="flex items-center gap-2">
+                      <a href="https://osp24.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-[#4361EE]/20 text-[#00E676] hover:bg-[#4361EE]/40 text-[10px] font-mono flex items-center gap-1">
+                        Live <ExternalLink className="w-3 h-3" />
+                      </a>
+                      <a href="https://vercel.com/nayaksahil445-hues-projects/osp24" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-[#2A3348] text-[#F1F1F1] hover:bg-[#4361EE] text-[10px] font-mono flex items-center gap-1">
+                        Vercel <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
 
-                  <a
-                    href="https://face-recognisation-two.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-[#0A0E1A]/80 border border-[#2A3348] hover:border-[#4361EE] rounded-xl flex items-center justify-between group transition-all"
-                  >
+                  <div className="p-3 bg-[#0A0E1A]/80 border border-[#2A3348] hover:border-[#4361EE] rounded-xl flex items-center justify-between group transition-all">
                     <div>
                       <span className="font-bold text-[#F1F1F1] group-hover:text-[#00E676] transition-colors block">
                         Smart Face Recognition Attendance
                       </span>
                       <span className="text-[10px] text-[#A0A0A0]">Python, OpenCV, SQLite · Live Demo</span>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-[#4361EE] group-hover:translate-x-0.5 transition-transform" />
-                  </a>
+                    <div className="flex items-center gap-2">
+                      <a href="https://face-recognisation-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-[#4361EE]/20 text-[#00E676] hover:bg-[#4361EE]/40 text-[10px] font-mono flex items-center gap-1">
+                        Live <ExternalLink className="w-3 h-3" />
+                      </a>
+                      <a href="https://vercel.com/nayaksahil445-hues-projects/face-recognisation" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-[#2A3348] text-[#F1F1F1] hover:bg-[#4361EE] text-[10px] font-mono flex items-center gap-1">
+                        Vercel <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ export const siteConfig = {
   email: "nayaksahil445@gmail.com",
   phone: "+91 7894838425",
   location: "Bhubaneswar, Odisha, India",
-  linkedin: "https://www.linkedin.com/in/sahil-nayak-dev",
+  linkedin: "https://www.linkedin.com/in/sahil-nayak-dev?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   github: "https://github.com/nayaksahil445-hue/nayaksahil445-hue",
   githubUsername: "nayaksahil445-hue",
   whatsapp: "https://wa.me/917894838425",
