@@ -127,7 +127,7 @@ export default function ResumeSection() {
                 <Phone className="w-4 h-4 text-[#4361EE]" />
                 <span>{siteConfig.phone}</span>
               </a>
-              <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#00E676] transition-colors">
+              <a href={siteConfig.linkedin} target="_blank" rel="me noopener noreferrer" className="flex items-center gap-2 hover:text-[#00E676] transition-colors">
                 <Linkedin className="w-4 h-4 text-[#4361EE]" />
                 <span>linkedin.com/in/sahil-nayak-dev</span>
               </a>

@@ -46,7 +46,7 @@ export default function Footer() {
               key={i}
               href={soc.href}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="me noopener noreferrer"
               className="p-2.5 rounded-xl bg-[#131A2B] border border-[#2A3348] hover:border-[#4361EE] text-[#A0A0A0] hover:text-[#F1F1F1] transition-all shadow-md"
               title={soc.label}
             >

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { siteConfig } from "@/data/site-config";
-import { Mail, Phone, MapPin, Send, MessageSquare, Check, AlertCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, Check, AlertCircle, Linkedin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -89,6 +89,26 @@ export default function ContactSection() {
             </p>
 
             <div className="flex flex-col gap-4 mt-4">
+              {/* LinkedIn SEO Verified Card */}
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-card/60 border border-[#4361EE]/30 hover:border-[#4361EE] transition-all shadow-md group">
+                <div className="p-3 bg-[#4361EE]/10 border border-[#4361EE]/30 rounded-lg text-[#4361EE]">
+                  <Linkedin className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-[#00E676] font-mono uppercase tracking-wider block font-semibold">
+                    ✓ Verified LinkedIn Profile
+                  </span>
+                  <a
+                    href={siteConfig.linkedin}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="text-sm md:text-base text-white hover:text-[#4361EE] font-mono truncate block font-bold"
+                  >
+                    linkedin.com/in/sahil-nayak-dev
+                  </a>
+                </div>
+              </div>
+
               {/* Mail Card */}
               <div className="flex items-center gap-4 p-4 rounded-xl bg-card/45 border border-primary/10 hover:border-primary/30 transition-all">
                 <div className="p-3 bg-card border border-primary/10 rounded-lg text-accent">
@@ -128,12 +148,21 @@ export default function ContactSection() {
             </div>
 
             {/* Quick Action Buttons */}
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="me noopener noreferrer"
+                className="w-full sm:flex-1 flex items-center justify-center gap-2 p-3 bg-[#4361EE] hover:bg-[#3451DE] text-white font-mono text-sm font-semibold rounded-xl shadow-lg transition-colors cursor-pointer"
+              >
+                <Linkedin className="w-4.5 h-4.5" />
+                Connect on LinkedIn
+              </a>
               <a
                 href={siteConfig.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 p-3 bg-green-600 hover:bg-green-700 text-white font-mono text-sm font-semibold rounded-xl shadow-lg transition-colors cursor-pointer"
+                className="w-full sm:flex-1 flex items-center justify-center gap-2 p-3 bg-green-600 hover:bg-green-700 text-white font-mono text-sm font-semibold rounded-xl shadow-lg transition-colors cursor-pointer"
               >
                 <MessageSquare className="w-4.5 h-4.5" />
                 WhatsApp Chat

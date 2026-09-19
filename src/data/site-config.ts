@@ -1,13 +1,14 @@
 export const siteConfig = {
   name: "Sahil Nayak",
-  title: "Sahil Nayak | Full Stack Developer & AI Engineer",
+  title: "Sahil Nayak | Full Stack Developer & AI Engineer | LinkedIn: sahil-nayak-dev",
   description:
-    "Full Stack Developer and Computer Science & Data Science Engineering student. Building modern web applications, AI-powered systems, and scalable platforms.",
+    "Sahil Nayak — Full Stack Developer & AI Engineer based in Bhubaneswar, Odisha. Founder of Odisha Service Point (OSP) & winner of BPUT Project Exhibition. Connect on LinkedIn (linkedin.com/in/sahil-nayak-dev).",
   url: "https://sahilnayak.dev",
   email: "nayaksahil445@gmail.com",
   phone: "+91 7894838425",
   location: "Bhubaneswar, Odisha, India",
   linkedin: "https://www.linkedin.com/in/sahil-nayak-dev?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  linkedinClean: "https://www.linkedin.com/in/sahil-nayak-dev",
   github: "https://github.com/nayaksahil445-hue/nayaksahil445-hue",
   githubUsername: "nayaksahil445-hue",
   whatsapp: "https://wa.me/917894838425",

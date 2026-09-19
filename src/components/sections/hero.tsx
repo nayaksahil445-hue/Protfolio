@@ -133,7 +133,7 @@ export default function HeroSection() {
                   key={i}
                   href={soc.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                   className={`p-2.5 rounded-xl border border-primary/10 text-text-secondary transition-all duration-300 ${soc.color}`}
                   title={soc.label}
                 >
